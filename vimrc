@@ -15,10 +15,16 @@ set number
 
 " Behaviour
 set clipboard=unnamed
-set history=1000
+set history=10000
 set hidden
 set hlsearch
-autocmd vimenter * if !argc() | NERDTree | endif
+
+" Nerdtree behavior
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+map <C-n> :NERDTreeToggle<CR>
+
+"set directory to current file
 set autochdir
 
 " Shortcut to rapidly toggle `set list`
